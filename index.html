@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCW97QWCK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NCCW97QWCK');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glade Cocktail Bar | Carta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        html {
+            background-color: #0A0A0A; /* Negro profundo */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #EDEDED;
+            background-color: transparent;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            margin: 0 auto;
+            max-width: 28rem; /* Ancho de teléfono móvil (max-w-md de Tailwind) */
+            background-image: url('tigre.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15; /* Sube la opacidad (0 a 1) para que se vea más nítido */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .font-title {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Colores Neón personalizados */
+        .text-neon-fuchsia { color: #FF00FF; text-shadow: 0 0 8px rgba(255, 0, 255, 0.6); }
+        .text-neon-cyan { color: #00FFFF; text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); }
+        
+        .border-neon-fuchsia { 
+            border-color: #FF00FF; 
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4), inset 0 0 5px rgba(255, 0, 255, 0.2); 
+        }
+        .border-neon-cyan { 
+            border-color: #00FFFF; 
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), inset 0 0 5px rgba(0, 255, 255, 0.2); 
+        }
+
+        .bg-dark-panel { background-color: #121212; }
+        .bg-card { background-color: #1A1A1A; }
+
+        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .no-scroll::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+
+<body class="text-gray-200">
+
+<header class="max-w-md mx-auto bg-[#050505] text-white h-20 sticky top-0 z-50 flex justify-center items-center shadow-[0_5px_15px_rgba(0,0,0,0.8)] border-b border-[#333] relative">
+    
+    <div id="header-title" class="absolute left-1/2 -translate-x-1/2 flex justify-center items-center">
+       <img id="header-logo" src="logo_glade.png" 
+            class="h-[60px] object-contain">
+    </div>
+    
+    <button id="btn-atras" onclick="history.back()"
+        class="hidden absolute left-4 text-xs bg-black px-3 py-2 rounded border border-neon-fuchsia text-[#FF00FF] font-title font-bold z-10 uppercase tracking-widest active:scale-95 transition-transform">
+        ← Volver
+    </button>
+</header>
+
+    <main class="max-w-md mx-auto p-4">
+
+        <div id="vista-categorias" class="fade-in space-y-5 pb-20">
+            <h2 class="text-center text-2xl font-title my-6 text-white tracking-widest uppercase">
+                Menú Glade
+            </h2>
+            <div id="contenedor-categorias-principal" class="space-y-5"></div>
+        </div>
+
+        <div id="vista-platos" class="hidden fade-in">
+            <h3 id="titulo-actual"
+                class="text-xl font-title mb-6 flex items-center uppercase tracking-widest text-[#00FFFF] drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] leading-tight">
+                <span class="w-10 h-[2px] bg-[#00FFFF] mr-3 flex-shrink-0"></span>
+                CATEGORÍA
+            </h3>
+            <div id="grid-platos" class="grid grid-cols-2 gap-4 pb-10"></div>
+        </div>
+    </main>
+
+    <div id="dish-detail"
+        class="fixed inset-0 max-w-md mx-auto z-[60] transform translate-y-full transition-transform duration-500 ease-in-out overflow-y-auto"
+        style="background-color: #050505;">
+
+        <button onclick="closeDetail()"
+            class="absolute top-6 right-6 bg-[#1A1A1A] text-[#FF00FF] w-12 h-12 rounded shadow-2xl z-10 font-bold border border-neon-fuchsia flex items-center justify-center text-xl active:scale-90 transition-transform">✕</button>
+
+        <div class="flex flex-col items-center justify-center min-h-screen p-6">
+
+            <div class="relative mb-10 mt-10">
+                <div
+                    class="w-60 h-60 rounded-full border-2 border-neon-cyan overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.2)] bg-card">
+                    <img id="detail-img" src="" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div
+                    class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#0A0A0A] px-6 py-2 rounded border border-neon-fuchsia shadow-lg min-w-[120px] text-center">
+                    <span id="detail-price" class="text-[#FF00FF] font-title font-bold text-xl tracking-wider"></span>
+                </div>
+            </div>
+
+            <div class="w-full bg-card rounded p-8 shadow-2xl border-t-4 border-[#00FFFF] relative">
+                
+                <h2 id="detail-title" class="text-2xl font-title text-neon-cyan text-center mb-6 uppercase tracking-wider leading-tight">
+                </h2>
+
+                <div class="space-y-8">
+                    <div class="text-center">
+                        <h4 class="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-3">
+                            Mixología & Ingredientes</h4>
+                        <p id="detail-ingredients"
+                            class="text-gray-300 text-sm leading-relaxed font-light px-2"></p>
+                    </div>
+
+                    <div class="text-center pt-4 border-t border-[#333]">
+                        <h4 class="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-4">
+                            Alérgenos</h4>
+                        <div id="detail-alergenos" class="flex justify-center gap-4 mt-2">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="closeDetail()"
+                    class="mt-10 w-full bg-[#0A0A0A] text-white py-4 rounded font-title font-bold shadow-lg border border-neon-cyan active:scale-95 transition-transform uppercase tracking-widest text-xs hover:bg-[#00FFFF] hover:text-black hover:shadow-[0_0_15px_rgba(0,255,255,0.6)]">
+                    Regresar
+                </button>
+            </div>
+
+            <p class="mt-8 text-gray-600 text-[10px] uppercase tracking-[0.5em] font-title">Glade Cocktail Bar</p>
+        </div>
+    </div>
+
+    <script>
+        const categorias = [
+            { id: 'COCKTAILS', foto: 'categorias/cocktails.jpg' },
+            { id: 'NUESTROS CLASICOS', foto: 'categorias/clasicos.jpg' },
+            { id: 'COCKTAILS SIN ALCOHOL', foto: 'categorias/sin_alcohol.jpg' },
+            { id: 'BATIDOS', foto: 'categorias/batidos.jpg' }
+        ];
+
+        const platos = [
+            // CATEGORÍA: COCKTAILS (Inferencia de ingredientes basada en nombre)
+            { id: 1, categoria: 'COCKTAILS', nombre: 'SCARLET', precio: '11,00 €', foto: 'cocteles/smoked_negroni.webp', ingredientes: 'Ginebra artesanal, Campari infusionado, Vermut rojo dulce. Toque ahumado con madera de roble.', alergenos: ['🍷'] },
+            { id: 2, categoria: 'COCKTAILS', nombre: 'FLORISEE', precio: '10,00 €', foto: 'cocteles/mediterranean_mule.webp', ingredientes: 'Vodka premium, Ginger Beer, zumo de lima fresca, toque mediterráneo de romero y tomillo.', alergenos: [] },
+            { id: 3, categoria: 'COCKTAILS', nombre: 'BANANA PIE', precio: '12,00 €', foto: 'cocteles/tiki_taka.webp', ingredientes: 'Mezcla de rones añejos, zumo de piña, maracuyá, sirope de almendras (Orgeat) y falernum casero.', alergenos: ['🌰'] },
+            { id: 4, categoria: 'COCKTAILS', nombre: 'MEZCALITA', precio: '11,00 €', foto: 'cocteles/el_charrito.webp', ingredientes: 'Tequila reposado, licor de naranja, zumo de agave, lima y un toque picante de jalapeño en el borde.', alergenos: [] },
+            { id: 5, categoria: 'COCKTAILS', nombre: 'CALAVERA', precio: '9,00 €', foto: 'cocteles/clover_club.webp', ingredientes: 'Ginebra, sirope de frambuesa casero, zumo de limón y clara de huevo para una textura sedosa.', alergenos: ['🥚'] },
+            { id: 6, categoria: 'COCKTAILS', nombre: 'ZEST', precio: '9,00 €', foto: 'cocteles/tommys_margarita.webp', ingredientes: 'Tequila 100% agave, zumo de lima fresca y néctar de agave. Servido con hielo.', alergenos: [] },
+            { id: 8, categoria: 'COCKTAILS', nombre: 'PALOMA DE MANGO', precio: '10,00 €', foto: 'cocteles/bourbon_sour.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+            { id: 9, categoria: 'COCKTAILS', nombre: 'COCO Y LIMON', precio: '10,00 €', foto: 'fotos/coco-y-limon.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+            { id: 10, categoria: 'COCKTAILS', nombre: 'FRESH & SPICY', precio: '10,00 €', foto: 'cocteles/bourbon_sour.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+            { id: 11, categoria: 'COCKTAILS', nombre: 'COOLER', precio: '10,00 €', foto: 'cocteles/bourbon_sour.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+            { id: 12, categoria: 'COCKTAILS', nombre: 'TEQUILA SUNSET', precio: '10,00 €', foto: 'cocteles/bourbon_sour.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+            { id: 13, categoria: 'COCKTAILS', nombre: 'BERRY COLLINS', precio: '10,00 €', foto: 'cocteles/bourbon_sour.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+            { id: 14, categoria: 'COCKTAILS', nombre: 'BLOODY GLADE', precio: '10,00 €', foto: 'fotos/bloodymary.webp', ingredientes: 'Bourbon whiskey, zumo de limón fresco, sirope simple y clara de huevo. Un clásico equilibrado.', alergenos: ['🥚'] },
+
+            // CATEGORÍA: NUESTROS CLASICOS
+            { id: 15, categoria: 'NUESTROS CLASICOS', nombre: 'ESPRESSO MARTINI', precio: '10,00 €', foto: 'fotos/espresso-martini.webp', ingredientes: 'Vodka, licor de café, café espresso recién hecho y sirope de azúcar. Un clásico estimulante.', alergenos: [] },
+            { id: 16, categoria: 'NUESTROS CLASICOS', nombre: 'TROPICAL', precio: '10,00 €', foto: 'fotos/tropical.webp', ingredientes: 'Ron blanco, zumo de piña, crema de coco y un toque de lima. Refrescante y dulce.', alergenos: [] },
+            { id: 17, categoria: 'NUESTROS CLASICOS', nombre: 'MEDICINA', precio: '10,00 €', foto: 'fotos/medicina.webp', ingredientes: 'Mezcla de destilados con notas cítricas y herbáceas. Una receta secreta de la casa para revivir.', alergenos: [] },
+            { id: 18, categoria: 'NUESTROS CLASICOS', nombre: 'PORNSTAR MARTINI', precio: '12,00 €', foto: 'fotos/pornstar-martini.webp', ingredientes: 'Vodka vainilla, licor de maracuyá, puré de fruta de la pasión y un chupito de cava de acompañamiento.', alergenos: [] },
+            { id: 19, categoria: 'NUESTROS CLASICOS', nombre: 'PALOMA', precio: '10,00 €', foto: 'fotos/paloma.webp', ingredientes: 'Tequila blanco, refresco de pomelo, zumo de lima y una pizca de sal. Muy refrescante.', alergenos: [] },
+            { id: 20, categoria: 'NUESTROS CLASICOS', nombre: 'MARGARITA GLADE', precio: '11,00 €', foto: 'cocteles/margarita_glade.webp', ingredientes: 'Nuestra versión cítrica y especial del clásico Margarita con tequila premium.', alergenos: [] },
+            { id: 21, categoria: 'NUESTROS CLASICOS', nombre: 'NATURALEZA', precio: '10,00 €', foto: 'fotos/naturaleza.webp', ingredientes: 'Frescura botánica en cada sorbo. Ginebra, pepino, albahaca y tónica artesanal.', alergenos: [] },
+            { id: 22, categoria: 'NUESTROS CLASICOS', nombre: 'MOSKOW MULE', precio: '10,00 €', foto: 'fotos/moscow-mule.webp', ingredientes: 'Vodka, ginger beer y zumo de lima fresco. Servido en su tradicional taza de cobre.', alergenos: [] },
+            { id: 23, categoria: 'NUESTROS CLASICOS', nombre: 'BRAVO', precio: '10,00 €', foto: 'fotos/bravo.webp', ingredientes: 'Carácter fuerte y decidido. Mezcla audaz de espirituosos oscuros y notas amargas.', alergenos: [] },
+            { id: 24, categoria: 'NUESTROS CLASICOS', nombre: 'PUMMELO', precio: '10,00 €', foto: 'cocteles/pummelo.webp', ingredientes: 'Una explosión cítrica centrada en el pomelo, balanceada con destilados de alta calidad.', alergenos: [] },
+            { id: 25, categoria: 'NUESTROS CLASICOS', nombre: 'BOSQUE', precio: '11,00 €', foto: 'fotos/bosque.webp', ingredientes: 'Aromas a pino y frutos del bosque. Ginebra infusionada, toques silvestres y moras.', alergenos: [] },
+            { id: 26, categoria: 'NUESTROS CLASICOS', nombre: 'ELEFANTE', precio: '10,00 €', foto: 'cocteles/elefante.webp', ingredientes: 'Exótico y corpulento. Notas especiadas, ron añejo, y sabores cálidos.', alergenos: [] },
+            { id: 27, categoria: 'NUESTROS CLASICOS', nombre: 'SELVA', precio: '10,00 €', foto: 'cocteles/selva.webp', ingredientes: 'Un viaje tropical intenso. Destilados macerados con frutas exóticas y frescura natural.', alergenos: [] },
+
+            // CATEGORÍA: COCKTAILS SIN ALCOHOL
+            { id: 28, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'NATURALEZA', precio: '8,00 €', foto: 'fotos/naturaleza.webp', ingredientes: 'Frescura botánica pura. Pepino, albahaca, y tónica premium 0.0.', alergenos: [] },
+            { id: 29, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'SELVA', precio: '8,00 €', foto: 'cocteles/selva_mocktail.webp', ingredientes: 'Viaje tropical sin alcohol. Mezcla de zumos exóticos y frutas maceradas.', alergenos: [] },
+            { id: 30, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'BANANA PIE', precio: '9,00 €', foto: 'cocteles/banana_pie_mocktail.webp', ingredientes: 'Crema de coco, puré de plátano, vainilla y sirope de almendras tostadas.', alergenos: ['🌰'] },
+            { id: 31, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'PUMMELO', precio: '8,00 €', foto: 'cocteles/pummelo_mocktail.webp', ingredientes: 'Explosión cítrica centrada en el pomelo rosa, agave y agua con gas.', alergenos: [] },
+            { id: 32, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'COCO Y LIMON', precio: '8,00 €', foto: 'fotos/coco-y-limon.webp', ingredientes: 'Equilibrio perfecto entre la cremosidad del coco y la acidez del limón fresco.', alergenos: [] },
+            { id: 33, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'LICHI', precio: '8,50 €', foto: 'cocteles/lichi_mocktail.webp', ingredientes: 'Delicado y floral. Zumo de lichi, toques florales y soda refrescante.', alergenos: [] },
+            { id: 34, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'SCARLET', precio: '8,00 €', foto: 'cocteles/scarlet_mocktail.webp', ingredientes: 'Aromas frutales vívidos. Frutos rojos machacados, cítricos y toque botánico cero alcohol.', alergenos: [] },
+            { id: 35, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'EMMA', precio: '8,00 €', foto: 'fotos/emma.webp', ingredientes: 'Elegante y suave. Mix de frutas blancas, flor de saúco y burbuja fina.', alergenos: [] },
+            { id: 36, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'ROSAS', precio: '8,50 €', foto: 'cocteles/rosas_mocktail.webp', ingredientes: 'Agua de rosas, infusiones botánicas y un perfil floral inconfundible.', alergenos: [] },
+            { id: 37, categoria: 'COCKTAILS SIN ALCOHOL', nombre: 'BERRY COLLINS', precio: '8,00 €', foto: 'cocteles/berry_collins_mocktail.webp', ingredientes: 'Refrescante y efervescente. Zumo de limón, frutos rojos frescos y soda.', alergenos: [] },
+
+            // CATEGORÍA: BATIDOS
+            { id: 38, categoria: 'BATIDOS', nombre: 'MANGO - FRUTOS ROJOS - COCO', precio: '7,00 €', foto: 'batidos/mango_coco.webp', ingredientes: 'Batido natural y refrescante a base de mango dulce, selección de frutos rojos y cremosa leche de coco.', alergenos: [] },
+            { id: 39, categoria: 'BATIDOS', nombre: 'BANANA - CAFÉ', precio: '7,00 €', foto: 'batidos/banana_cafe.webp', ingredientes: 'Un chute de energía. Plátano canario, leche fresca, toques de vainilla y un shot de café espresso recién hecho.', alergenos: ['🥛'] }
+        ];
+
+        function renderCategorias() {
+            const container = document.getElementById('contenedor-categorias-principal');
+            container.innerHTML = categorias.map(cat => `
+                <div onclick="filtrar('${cat.id}')" class="relative h-36 rounded overflow-hidden shadow-lg border border-[#333] active:scale-95 transition-transform cursor-pointer hover:border-neon-cyan group">
+                    <img src="${cat.foto}" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-40 bg-[#1A1A1A] group-hover:opacity-60 transition-opacity" alt="${cat.id}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-4">
+                        <span class="text-white text-xl font-title tracking-[0.2em] uppercase drop-shadow-md text-center px-2 leading-tight">${cat.id}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filtrar(cat) {
+            const filtrados = platos.filter(p => p.categoria === cat);
+
+            document.getElementById('vista-categorias').classList.add('hidden');
+            document.getElementById('vista-platos').classList.remove('hidden');
+            document.getElementById('btn-atras').classList.remove('hidden');
+            document.getElementById('header-title').classList.add('hidden');
+            document.getElementById('titulo-actual').innerText = cat;
+            
+            const grid = document.getElementById('grid-platos');
+            grid.innerHTML = '';
+            
+            if (filtrados.length === 0) {
+                grid.innerHTML = '<p class="col-span-2 text-center text-gray-500 py-10 font-title text-sm uppercase">Próximamente</p>';
+            } else {
+                filtrados.forEach(plato => {
+                    grid.innerHTML += `
+                        <div onclick="openDetail(${plato.id})" class="bg-card rounded shadow-lg overflow-hidden active:scale-95 transition-transform duration-200 text-center border-b-2 border-[#FF00FF] flex flex-col h-full">
+                            <img src="${plato.foto}" loading="lazy" class="w-full h-40 object-cover opacity-80 flex-shrink-0">
+                            <div class="p-4 flex flex-col justify-between flex-grow">
+                                <h4 class="font-title text-sm tracking-wide leading-tight text-gray-200">${plato.nombre}</h4>
+                                <p class="text-[#00FFFF] font-title font-bold text-base mt-2 whitespace-nowrap">${plato.precio}</p>
+                            </div>
+                        </div>`;
+                });
+            }
+            history.pushState({ view: 'platos' }, "");
+            window.scrollTo(0, 0);
+        }
+
+        function openDetail(id) {
+            const p = platos.find(x => x.id === id);
+            document.getElementById('detail-img').src = p.foto;
+            document.getElementById('detail-title').innerText = p.nombre;
+            document.getElementById('detail-price').innerText = p.precio;
+            
+            const divIngredientes = document.getElementById('detail-ingredients');
+            const divAlergenos = document.getElementById('detail-alergenos');
+
+            divIngredientes.innerText = p.ingredientes;
+            divAlergenos.innerHTML = p.alergenos && p.alergenos.length > 0 ? p.alergenos.map(a => `
+                <div class="w-10 h-10 rounded border border-neon-cyan flex items-center justify-center bg-[#050505] text-lg shadow-[0_0_10px_rgba(0,255,255,0.2)]">
+                    ${a}
+                </div>`).join('') : '<span class="text-xs text-gray-600 font-light">Sin alérgenos declarados*</span>';
+
+            document.getElementById('dish-detail').classList.remove('translate-y-full');
+            document.body.style.overflow = 'hidden';
+            history.pushState({ view: 'detalle' }, "");
+        }
+
+        function closeDetail() {
+            document.getElementById('dish-detail').classList.add('translate-y-full');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onload = renderCategorias;
+
+        window.onpopstate = function(event) {
+            const detailOpen = !document.getElementById('dish-detail').classList.contains('translate-y-full');
+            const platosOpen = !document.getElementById('vista-platos').classList.contains('hidden');
+
+            if (detailOpen) {
+                closeDetail();
+            } 
+            else if (platosOpen) {
+                document.getElementById('vista-categorias').classList.remove('hidden');
+                document.getElementById('vista-platos').classList.add('hidden');
+                document.getElementById('btn-atras').classList.add('hidden');
+                document.getElementById('header-title').classList.remove('hidden');
+            }
+        };
+    </script>
+
+</body>
+</html>
