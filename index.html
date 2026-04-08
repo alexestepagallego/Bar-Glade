@@ -16,7 +16,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -26,9 +26,10 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             color: #EDEDED;
             background-color: transparent;
+            letter-spacing: 0.05em;
         }
 
         body::before {
@@ -51,28 +52,19 @@
         }
 
         .font-title {
-            font-family: 'Space Mono', monospace;
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 0.15em;
         }
 
         /* Colores Neón personalizados */
-        .text-neon-fuchsia {
-            color: #FF00FF;
-            text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+        .text-neon-amber {
+            color: #FFFFFF;
+            text-shadow: 0 0 8px #FFBF00, 0 0 12px #FFBF00;
         }
 
-        .text-neon-cyan {
-            color: #00FFFF;
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-        }
-
-        .border-neon-fuchsia {
-            border-color: #FF00FF;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4), inset 0 0 5px rgba(255, 0, 255, 0.2);
-        }
-
-        .border-neon-cyan {
-            border-color: #00FFFF;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), inset 0 0 5px rgba(0, 255, 255, 0.2);
+        .border-neon-amber {
+            border-color: #FFBF00;
+            box-shadow: 0 0 10px rgba(255, 191, 0, 0.5), inset 0 0 5px rgba(255, 191, 0, 0.2);
         }
 
         .bg-dark-panel {
@@ -113,7 +105,7 @@
         </div>
 
         <button id="btn-atras" onclick="history.back()"
-            class="hidden absolute left-4 text-xs bg-black px-3 py-2 rounded border border-neon-fuchsia text-[#FF00FF] font-title font-bold z-10 uppercase tracking-widest active:scale-95 transition-transform">
+            class="hidden absolute left-4 text-xs bg-black px-3 py-2 rounded border border-neon-amber text-neon-amber font-title font-bold z-10 uppercase tracking-widest active:scale-95 transition-transform">
             ← Volver
         </button>
     </header>
@@ -129,8 +121,8 @@
 
         <div id="vista-platos" class="hidden fade-in">
             <h3 id="titulo-actual"
-                class="text-xl font-title mb-6 flex items-center uppercase tracking-widest text-[#00FFFF] drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] leading-tight">
-                <span class="w-10 h-[2px] bg-[#00FFFF] mr-3 flex-shrink-0"></span>
+                class="text-xl font-title mb-6 flex items-center uppercase tracking-[0.2em] text-neon-amber leading-tight">
+                <span class="w-10 h-[2px] bg-[#FFBF00] shadow-[0_0_8px_#FFBF00] mr-3 flex-shrink-0"></span>
                 CATEGORÍA
             </h3>
             <div id="grid-platos" class="grid grid-cols-2 gap-4 pb-10"></div>
@@ -142,25 +134,25 @@
         style="background-color: #050505;">
 
         <button onclick="closeDetail()"
-            class="absolute top-6 right-6 bg-[#1A1A1A] text-[#FF00FF] w-12 h-12 rounded shadow-2xl z-10 font-bold border border-neon-fuchsia flex items-center justify-center text-xl active:scale-90 transition-transform">✕</button>
+            class="absolute top-6 right-6 bg-[#1A1A1A] text-white w-12 h-12 rounded shadow-2xl z-10 font-bold border border-neon-amber flex items-center justify-center text-xl active:scale-90 transition-transform">✕</button>
 
         <div class="flex flex-col items-center justify-center min-h-screen p-6">
 
             <div class="relative mb-10 mt-10">
                 <div
-                    class="w-60 h-60 rounded-full border-2 border-neon-cyan overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.2)] bg-card">
+                    class="w-60 h-60 rounded-full border-2 border-neon-amber overflow-hidden bg-card">
                     <img id="detail-img" src="" class="w-full h-full object-cover opacity-90">
                 </div>
                 <div
-                    class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#0A0A0A] px-6 py-2 rounded border border-neon-fuchsia shadow-lg min-w-[120px] text-center">
-                    <span id="detail-price" class="text-[#FF00FF] font-title font-bold text-xl tracking-wider"></span>
+                    class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#0A0A0A] px-6 py-2 rounded border border-neon-amber shadow-lg min-w-[120px] text-center">
+                    <span id="detail-price" class="text-neon-amber font-title font-bold text-xl tracking-[0.1em]"></span>
                 </div>
             </div>
 
-            <div class="w-full bg-card rounded p-8 shadow-2xl border-t-4 border-[#00FFFF] relative">
+            <div class="w-full bg-card rounded p-8 shadow-2xl border-t-4 border-[#FFBF00] relative drop-shadow-[0_-5px_15px_rgba(255,191,0,0.15)]">
 
                 <h2 id="detail-title"
-                    class="text-2xl font-title text-neon-cyan text-center mb-6 uppercase tracking-wider leading-tight">
+                    class="text-2xl font-title text-neon-amber text-center mb-6 uppercase tracking-[0.15em] leading-tight">
                 </h2>
 
                 <div class="space-y-8">
@@ -179,7 +171,7 @@
                 </div>
 
                 <button onclick="closeDetail()"
-                    class="mt-10 w-full bg-[#0A0A0A] text-white py-4 rounded font-title font-bold shadow-lg border border-neon-cyan active:scale-95 transition-transform uppercase tracking-widest text-xs hover:bg-[#00FFFF] hover:text-black hover:shadow-[0_0_15px_rgba(0,255,255,0.6)]">
+                    class="mt-10 w-full bg-[#0A0A0A] text-white py-4 rounded font-title font-bold shadow-lg border border-neon-amber active:scale-95 transition-transform uppercase tracking-widest text-xs hover:bg-[#FFBF00] hover:text-black hover:shadow-[0_0_15px_rgba(255,191,0,0.6)]">
                     Regresar
                 </button>
             </div>
@@ -247,7 +239,7 @@
         function renderCategorias() {
             const container = document.getElementById('contenedor-categorias-principal');
             container.innerHTML = categorias.map(cat => `
-                <div onclick="filtrar('${cat.id}')" class="relative h-36 rounded overflow-hidden shadow-lg border border-[#333] active:scale-95 transition-transform cursor-pointer hover:border-neon-cyan group">
+                <div onclick="filtrar('${cat.id}')" class="relative h-36 rounded overflow-hidden shadow-lg border border-[#333] active:scale-95 transition-transform cursor-pointer hover:border-neon-amber group">
                     <img src="${cat.foto}" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-70 bg-[#1A1A1A] group-hover:opacity-90 transition-opacity" alt="${cat.id}">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-4">
                         <span class="text-white text-xl font-title tracking-[0.2em] uppercase drop-shadow-md text-center px-2 leading-tight">${cat.id}</span>
@@ -273,11 +265,11 @@
             } else {
                 filtrados.forEach(plato => {
                     grid.innerHTML += `
-                        <div onclick="openDetail(${plato.id})" class="bg-card rounded shadow-lg overflow-hidden active:scale-95 transition-transform duration-200 text-center border-b-2 border-[#FF00FF] flex flex-col h-full">
+                        <div onclick="openDetail(${plato.id})" class="bg-card rounded shadow-lg overflow-hidden active:scale-95 transition-transform duration-200 text-center border-b-2 border-[#FFBF00] flex flex-col h-full shadow-[0_4px_10px_rgba(255,191,0,0.1)]">
                             <img src="${plato.foto}" loading="lazy" class="w-full h-40 object-cover opacity-80 flex-shrink-0">
                             <div class="p-4 flex flex-col justify-between flex-grow">
                                 <h4 class="font-title text-sm tracking-wide leading-tight text-gray-200">${plato.nombre}</h4>
-                                <p class="text-[#00FFFF] font-title font-bold text-base mt-2 whitespace-nowrap">${plato.precio}</p>
+                                <p class="text-neon-amber font-title font-bold text-base mt-2 whitespace-nowrap">${plato.precio}</p>
                             </div>
                         </div>`;
                 });
@@ -297,7 +289,7 @@
 
             divIngredientes.innerText = p.ingredientes;
             divAlergenos.innerHTML = p.alergenos && p.alergenos.length > 0 ? p.alergenos.map(a => `
-                <div class="w-10 h-10 rounded border border-neon-cyan flex items-center justify-center bg-[#050505] text-lg shadow-[0_0_10px_rgba(0,255,255,0.2)]">
+                <div class="w-10 h-10 rounded border border-neon-amber flex items-center justify-center bg-[#050505] text-lg shadow-[0_0_10px_rgba(255,191,0,0.2)]">
                     ${a}
                 </div>`).join('') : '<span class="text-xs text-gray-600 font-light">Sin alérgenos declarados*</span>';
 
